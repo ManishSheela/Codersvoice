@@ -1,0 +1,4 @@
+[+] To redirect the page we use useNavigate() Hook
+[+] {children} property in props used to add data in component <Card> {children} </Card>   
+[+] 
+[+]

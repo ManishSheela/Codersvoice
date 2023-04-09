@@ -1,0 +1,11 @@
+.input{
+    border:none;
+    outline:none;
+    background: #323232;
+    padding:10px 20px;
+    width: 250px;
+    font-size: 16px;
+    border-radius: 10px;
+    color:#fff;
+    text-transform: capitalize;
+}
