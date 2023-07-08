@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 /* background:#121212 {primary Background color}
   #1D1D1D secondary Background
-
-
 */
 html {
     box-sizing: border-box;
@@ -50,6 +48,7 @@ width: 1200px;
 max-width: 90%;
 margin:0 auto;
 }
+
 .cardWrapper{
 display: flex;
 justify-content: center;

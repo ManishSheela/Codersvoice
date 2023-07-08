@@ -12,8 +12,9 @@ const StepOtp = ({ onNext }) => {
   // retrive data from redux store
   const {phone,hash} = useSelector((state) => state.auth.otp);
   async function submit() {
+    if (!otp || !phone || !hash) return;
     try {
-      const { data } = await verifyOtp({ otp, phone: phone, hash: hash });
+      const { data } = await verifyOtp({ otp, phone: phone, hash: hash }); // opt phone hash
       dispatch(setAuth(data));
     } catch (err) {
       console.log(err);

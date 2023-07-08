@@ -6,10 +6,10 @@ import styles from "./StepPhoneEmail.module.css";
 const Email = ({onNext}) => {
      const [emailId, setEmailId] = useState("");
   return (
-    <Card title="Enter your email id " icon="email-emoji">
+    <Card title="Enter your Email Id " icon="email-emoji">
       <InputBox type={emailId} onChange={(e) => setEmailId(e.target.value)} />
       <div className={styles.actionButtonWrap}>
-        <Button buttonText="Next" onClick={onNext}/>
+        <Button buttonText="Next" onClick={onNext} />
       </div>
       <p className={styles.bottomParagraph}>
         By entering your email id, you're agreeing to our Terms of Service and

@@ -17,7 +17,6 @@ const StepName = ({ onNext }) => {
   }
   return (
     <Card title="What’s your full name?" icon="goggle-emoji">
-      
       <InputBox onChange={(e) => setFullName(e.target.value)} />
 
       <p className={styles.paragraph}>

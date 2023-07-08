@@ -1,18 +1,23 @@
-import './App.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Navigation from './components/shared/Navigation/Navigation';
-import Authenticate from './pages/Authenticate/Authenticate';
-import Activate from './pages/Activate/Activate';
-import Rooms from './pages/Rooms/Rooms';
-import { useSelector } from 'react-redux';
+import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Navigation from "./components/shared/Navigation/Navigation";
+import Authenticate from "./pages/Authenticate/Authenticate";
+import Activate from "./pages/Activate/Activate";
+import Rooms from "./pages/Rooms/Rooms";
+import { useSelector } from "react-redux";
+import { useLoading } from "./hooks/useLoading";
+import Loader from "./components/shared/Loader/Loader";
 // let isAuth = false;
 // const user = {
 //   activated: true
 // }
 function App() {
-  const { user, isAuth } = useSelector((state) => state.auth);
-  return (
+  const { loading } = useLoading();
+
+  return loading ? (
+    <Loader message="Please hold on while we retrieve the information" />
+  ) : (
     <>
       {/* setting up react router  */}
       <BrowserRouter>
@@ -23,28 +28,32 @@ function App() {
             path="/"
             exact
             element={
-              <GuestRoute isAuth={isAuth}>
+              <GuestRoute>
                 <Home />
               </GuestRoute>
             }
           />
-          {/* Authenticate Route  */}
+          {/* Authenticate Route 
+            it contain's the setPhoneEmail and setOtp steps
+           */}
           <Route
             path="/authenticate"
             exact
             element={
-              <GuestRoute isAuth={isAuth}>
+              <GuestRoute>
                 <Authenticate />
               </GuestRoute>
             }
           />
-          {/* Activate Route  */}
+          {/* Activate Route  
+              This Activate route contains the Name and Avatar Steps 
+          */}
 
           <Route
             path="/activate"
             exact
             element={
-              <SemiProtectedRoute isAuth={isAuth}>
+              <SemiProtectedRoute>
                 <Activate />
               </SemiProtectedRoute>
             }
@@ -56,7 +65,8 @@ function App() {
             path="/rooms"
             exact
             element={
-              <ProtectedRoute isAuth={isAuth}>
+              <ProtectedRoute>
+                {/* EveryThing Defined between this Protected route is Children elements */}
                 <Rooms />
               </ProtectedRoute>
             }
@@ -66,27 +76,28 @@ function App() {
     </>
   );
 }
- // GuestRoute 
-const GuestRoute = ({ isAuth, children }) => {
+// GuestRoute
+const GuestRoute = ({ children }) => {
+  const { isAuth, user } = useSelector((state) => state.auth);
   if (isAuth) return <Navigate to="/rooms" replace />;
   return children;
 };
 // SemiProtected Route
-const SemiProtectedRoute = ({ isAuth, children }) => {
-  const { user } = useSelector((state) => state.auth);
+const SemiProtectedRoute = ({ children }) => {
+  const { isAuth, user } = useSelector((state) => state.auth);
 
   if (!isAuth) return <Navigate to="/" replace />;
   else if (isAuth && !user.activated) return children;
-  else return <Navigate to="/rooms" replace />;;
+  else return <Navigate to="/rooms" replace />;
 };
 // Protected Route
-const ProtectedRoute = ({ isAuth, children }) => {
-  
-  const { user } = useSelector((state) => state.auth);
-
+// if isAuth true and user.activated == true then Navigate to Rooms page
+const ProtectedRoute = ({ children }) => {
+  const { isAuth, user } = useSelector((state) => state.auth);
   if (!isAuth) return <Navigate to="/" replace />;
-  else if (isAuth && !user.activated) return <Navigate to="/activate" replace />;
-  else return children;
+  else if (isAuth && !user.activated) {
+    return <Navigate to="/activate" replace />;
+  } else return children; // navigate rooms page
 };
 
 export default App;

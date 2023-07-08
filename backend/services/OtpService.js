@@ -5,9 +5,10 @@ const smsAuthToken = process.env.SMS_AUTH_TOKEN;
 const client = require("twilio")(accountSid, smsAuthToken, {
   lazyLoading: true,
 });
+
 class OtpService {
   generateOtp() {
-    return crypto.randomInt(1000, 9999);
+    return crypto.randomInt(1000, 9999); // randomInt fucnction use to generate random integer between 1000 and 9999
   }
   async sendBySms(phone, otp) {
     return await client.messages.create({

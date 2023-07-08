@@ -16,9 +16,10 @@ const Home = () => {
   }
   return (
     // <></> this is called freagments
+
     <div className={styles.cardWrapper}>
       {/* sending props to the Card components for logo and title heading */}
-      <Card title="Welcome to Codershouse!" icon="logo">
+      <Card icon="logo" title="Welcome to Codershouse!">
         {/* all the children content show because of prop special property sent to Card component*/}
         <p className={styles.text}>
           We're working hard to get Codershouse ready for everyone! While we
@@ -38,7 +39,6 @@ const Home = () => {
           </Link>
         </div>
       </Card>
-  
     </div>
   );
 };
