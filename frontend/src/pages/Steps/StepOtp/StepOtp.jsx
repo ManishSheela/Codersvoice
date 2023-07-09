@@ -6,20 +6,27 @@ import Card from '../../../components/shared/Card/Card';
 import { verifyOtp } from '../../../http';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth } from '../../../store/authSlice';
+import { setName, setAvatar } from "../../../store/activateSlice";
+
 const StepOtp = ({ onNext }) => {
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   // retrive data from redux store
-  const {phone,hash} = useSelector((state) => state.auth.otp);
+  const { phone, hash } = useSelector((state) => state.auth.otp);
   async function submit() {
     if (!otp || !phone || !hash) return;
     try {
       const { data } = await verifyOtp({ otp, phone: phone, hash: hash }); // opt phone hash
+      console.log(data);
       dispatch(setAuth(data));
+
+      if (data.user.name) {
+        dispatch(setName(data.user.name));
+        dispatch(setAvatar(data.user.avatar));
+      }
     } catch (err) {
       console.log(err);
     }
-    
   }
   return (
     <div className={styles.cardWrapper}>
@@ -29,7 +36,7 @@ const StepOtp = ({ onNext }) => {
         <p className={styles.bottomParagraph}>Didn't receive? Tap to resend</p>
 
         <div className={styles.actionButtonWrap}>
-          <Button buttonText="Next" onClick={submit}/>
+          <Button buttonText="Next" onClick={submit} />
         </div>
       </Card>
     </div>
