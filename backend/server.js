@@ -12,8 +12,8 @@ const corsOption = {
 }
 app.use(cors(corsOption));
 
-
 dbConnect();
+app.use("/storage", express.static("storage"));
 const PORT = process.env.PORT || 5500;
 app.use(express.json({limit:'5mb'}));
 app.use(router);

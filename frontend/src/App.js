@@ -5,6 +5,7 @@ import Navigation from "./components/shared/Navigation/Navigation";
 import Authenticate from "./pages/Authenticate/Authenticate";
 import Activate from "./pages/Activate/Activate";
 import Rooms from "./pages/Rooms/Rooms";
+import Room from "./pages/Room/Room";
 import { useSelector } from "react-redux";
 import { useLoading } from "./hooks/useLoading";
 import Loader from "./components/shared/Loader/Loader";
@@ -71,6 +72,18 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          {/* single room route  */}
+          <Route
+            path="/room/:id"
+            exact
+            element={
+              <ProtectedRoute>
+                {/* EveryThing Defined between this Protected route is Children elements */}
+                <Room />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
@@ -78,7 +91,7 @@ function App() {
 }
 // GuestRoute
 const GuestRoute = ({ children }) => {
-  const { isAuth, user } = useSelector((state) => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
   if (isAuth) return <Navigate to="/rooms" replace />;
   return children;
 };
