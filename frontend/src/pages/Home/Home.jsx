@@ -19,10 +19,10 @@ const Home = () => {
 
     <div className={styles.cardWrapper}>
       {/* sending props to the Card components for logo and title heading */}
-      <Card icon="logo" title="Welcome to Codershouse!">
+      <Card icon="logo" title="Welcome to Codersvoice!">
         {/* all the children content show because of prop special property sent to Card component*/}
         <p className={styles.text}>
-          We're working hard to get Codershouse ready for everyone! While we
+          We're working hard to get Codersvoice ready for everyone! While we
           wrap up the finishing youches, we're adding people gradually to make
           sure nothing breaks
         </p>

@@ -12,15 +12,14 @@ class OtpService {
   }
   async sendBySms(phone, otp) {
     return await client.messages.create({
-        to: phone,
-        from: process.env.SMS_FROM_NUMBER,
-        body: `Your codershouses OTP is ${otp}`,
-      });
+      to: phone,
+      from: process.env.SMS_FROM_NUMBER,
+      body: `Your Codersvoices OTP is ${otp}`,
+    });
   }
-  verifyOtp(hashOtp,data) {
+  verifyOtp(hashOtp, data) {
     const computedHash = hashService.hashOtp(data);
     return computedHash === hashOtp;
-    
   }
   sendByEmail() {}
 }

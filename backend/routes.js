@@ -11,6 +11,9 @@ router.get("/api/refresh", authController.refresh);
 router.post("/api/logout", activateMiddleware, authController.logout);
 router.post("/api/rooms", activateMiddleware, roomController.create);
 router.get("/api/rooms", activateMiddleware, roomController.getAllRooms);
+router.get("/api/rooms/:roomId", activateMiddleware, roomController.show);
+router.get("/api/test", (req, res) => res.json({ msg: "OK" }));
+
 
 
 module.exports = router;
