@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./RoomCard.module.css";
 import { useNavigate } from "react-router-dom";
+
 const RoomCard = ({ room }) => {
   const navigate = useNavigate();
   return (
-    <div className={styles.card} onClick={() => navigate(`/room/${room.id}`)}>
+    <div onClick={() => navigate(`/room/${room.id}`)} className={styles.card}>
       <h3 className={styles.topic}>{room.topic}</h3>
       <div
         className={`${styles.speakers} ${
@@ -12,10 +13,9 @@ const RoomCard = ({ room }) => {
         }`}
       >
         <div className={styles.avatars}>
-          <img
-            src="http://localhost:5500/storage/1688877677858-409059159.png"
-            alt="user-icon"
-          />
+          {room.speakers.map((speaker) => (
+            <img key={speaker.id} src={speaker.avatar} alt="speaker-avatar" />
+          ))}
         </div>
         <div className={styles.names}>
           {room.speakers.map((speaker) => (

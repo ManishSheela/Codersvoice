@@ -31,12 +31,25 @@ const Navigation = () => {
     <nav className={`${styles.navbar} container`}>
       <Link to="/" style={brandStyle}>
         <img src="/images/logo.png" alt="logo" />
-        <span style={logoText}>Codershouse</span>
+        <span style={logoText}>Codersvoice</span>
       </Link>
       {isAuth && (
-        <div>
+        <div className={styles.navRight}>
+          {/* <div className={styles.profile}> */}
+          <h3>{user?.name}</h3>
+          <Link to="/">
+            <img
+              className={styles.avatar}
+              src={user.avatar ? user.avatar : "/images/monkey-avatar.png"}
+              width="40"
+              height="40"
+              alt="avatar"
+            />
+          </Link>
+          {/* </div> */}
           <button className={styles.logoutButton} onClick={logoutUser}>
             Logout
+            {/* <img src="/images/logout.png" alt="logout" /> */}
           </button>
         </div>
       )}

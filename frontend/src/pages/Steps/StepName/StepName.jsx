@@ -20,7 +20,7 @@ const StepName = ({ onNext }) => {
       <InputBox onChange={(e) => setFullName(e.target.value)} />
 
       <p className={styles.paragraph}>
-        People use real names at codershouse :) !
+        People use real names at Codersvoice :) !
       </p>
 
       <div className={styles.actionButtonWrap}>
